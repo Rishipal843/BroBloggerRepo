@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/header", { post: post }) %>
+<body>
+  
+    <%- include("partials/head") %>
+
+
+<!-- main post -->
+ <div class="bg-white py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <article class="max-w-4xl mx-auto">
+      
+      <header class="text-center mb-12">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          <%= post.title %>
+        </h1>
+        <div class="flex items-center justify-center space-x-4">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-lg font-medium">
+            <%= post.author.split(' ').map(n => n[0]).join('').toUpperCase() %>
+          </div>
+          <div>
+            <p class="text-base font-medium text-gray-900"><%= post.author %></p>
+            <p class="text-xs text-gray-500"><%= new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) %></p>
+          </div>
+        </div>
+      </header>
+      
+      <% if (post.image) { %>
+        <img src="<%= post.image %>" alt="<%= post.title %>" class="w-full lg:h-[400px] aspect-video object-cover rounded-xl shadow-lg mb-12">
+      <% } %>
+
+      <div class="prose prose-lg lg:prose-xl max-w-none">
+        <%- post.content %>
+      </div>
+
+      <footer class="mt-12 pt-6 border-t border-gray-200">
+        <div class="flex items-center flex-wrap gap-4">
+          <span class="font-medium text-gray-900">Category:</span>
+          <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full"><%= post.category %></span>
+        </div>
+        <% if (post.tags && post.tags.length > 0) { %>
+          <div class="flex items-center flex-wrap gap-4 mt-4">
+            <span class="font-medium text-gray-900">Tags:</span>
+            <% post.tags.forEach(tag => { %>
+     <span class="inline-flex items-center px-4  rounded-full text-sm font-medium border border-gray-300 bg-white text-gray-500  hover:text-blue-600 hover:border-blue-400 transition-colors cursor-pointer">
+            <svg class=" h-3 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5a.997.997 0 01.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+            <%= tag %>
+          </span>
+              <% }) %>
+          </div>
+        <% } %>
+      </footer>
+    </article>
+  </div>
+</div>  
+
+
+
+<!-- related posts -->
+<section class="py-15 sm:py-24 bg-blue-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-15">
+      <h1 class="text-4xl font-bold text-gray-900 inline-block relative pb-3">
+        Related Blogs
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-blue-600 rounded-full"></span>
+      </h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% if (relatedPosts.length > 0) { %>
+        <% relatedPosts.forEach(rp => { %>
+
+          <a href="/post/<%= rp.slug %>" class="group block bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+            <article>
+              <div class="aspect-[16/10] overflow-hidden">
+                <% if (rp.image) { %>
+                  <img
+                    src="<%= rp.image %>"
+                    alt="<%= rp.title %>"
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                <% } %>
+              </div>
+              
+              <div class="p-6 flex flex-col h-full">
+                <div class="mb-3">
+                  <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"><%= rp.category %></span>
+                </div>
+                
+                <h2 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200 line-clamp-2">
+                  <%= rp.title %>
+                </h2>
+                
+                <% if (rp.content) { %>
+                  <p class="text-gray-600 mb-4 line-clamp-3 flex-grow"><%- rp.content.replace(/<[^>]*>/g, '').substring(0, 120) %>...</p>
+                <% } %>
+                
+                <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                      <%= rp.author.split(' ').map(n => n[0]).join('').toUpperCase() %>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-gray-900"><%= rp.author %></p>
+                      <p class="text-xs text-gray-500"><%= new Date(rp.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) %></p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </article>
+          </a>
+
+        <% }) %>
+      <% } else { %>
+        <p class="text-center text-gray-500 col-span-full">No related posts found.</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+
+  <%- include("partials/footer") %>
+
+</body>
+</html>
+
+
+
+

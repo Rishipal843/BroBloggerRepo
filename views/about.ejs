@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/header", { title: "About Us", post: null }) %>
+<body>
+<%- include("partials/head") %>
+  <!-- Your About Us Content -->
+   
+ <!-- Hero Section -->
+         <div class="relative">
+    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-50"></div>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
+            
+            <!-- Background Image and Overlay -->
+            <div class="absolute inset-0">
+                <!-- 1. Image is now at full opacity -->
+                <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100" alt="People working on laptops">
+                
+                <!-- 2. Added a dark overlay to create contrast -->
+                <div class="absolute inset-0 bg-gray-900 mix-blend-multiply opacity-60"></div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="relative z-10 px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+                <!-- 3. Added a drop-shadow for better text separation -->
+                <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl drop-shadow-md">
+                    <span class="block text-white">About</span>
+                    <!-- Made the brand name color slightly brighter -->
+                    <span class="block text-indigo-300">BroBlogger</span>
+                </h1>
+                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-100 sm:max-w-3xl drop-shadow-sm">
+                    Your go-to destination for insightful articles, tutorials, and stories from the world of technology, design, and innovation.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- <div>
+
+</div> -->
+
+            <!-- Main Content Section -->
+            <div class="bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+                <div class="max-w-3xl mx-auto">
+                    
+                    <!-- Our Mission -->
+                    <div class="text-lg text-gray-700 leading-8">
+                        <p>
+                            In an age of constant information, we believe in bringing you <strong class="font-semibold text-blue-600">clarity and depth</strong>. Our mission is to uncover the real story behind today's technology, delivering <strong class="font-semibold text-blue-600">verified facts</strong> and compelling narratives on the software, hardware, and breakthrough innovations that shape our world.
+                        </p>
+                    </div>
+
+                    <!-- What We Do Section -->
+                    <div class="mt-16">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 text-center">What We Do</h2>
+                        <p class="mt-4 max-w-2xl mx-auto text-center text-lg text-gray-600">
+                            At BroBlogger, we are passionate about the entire tech ecosystem. We dive deep into the subjects that matter, providing content that is both educational and engaging.
+                        </p>
+
+                        <div class="mt-12 grid gap-8 md:grid-cols-2">
+                            <!-- Feature 1: Cutting-Edge Tech -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white">
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">Cutting-Edge Technology</h3>
+                                    <p class="mt-2 text-base text-gray-600">
+                                        From AI and machine learning to the latest consumer gadgets, we keep you informed about what's next.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Feature 2: In-Depth Analysis -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white">
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M3 10h2a2 2 0 012 2v6a2 2 0 01-2 2H3a2 2 0 01-2-2v-6a2 2 0 012-2zM3 6h2a2 2 0 012 2v2H3V8a2 2 0 010-2z" /></svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">In-Depth Analysis</h3>
+                                    <p class="mt-2 text-base text-gray-600">
+                                        We go beyond the news to provide insightful analysis of software, hardware, and industry trends.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Feature 3: Practical Tutorials -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white">
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">Practical Tutorials</h3>
+                                    <p class="mt-2 text-base text-gray-600">
+                                        Learn new skills with step-by-step guides for developers, designers, and tech enthusiasts.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Feature 4: Inspiring Innovation -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white">
+                                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">Inspiring Innovation</h3>
+                                    <p class="mt-2 text-base text-gray-600">
+                                        We share the stories of people and ideas pushing boundaries, from startups to new design principles.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Our Promise Section -->
+                    <div class="mt-20">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-8 shadow-sm">
+                           <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Our Promise</h2>
+                           <p class="mt-4 text-lg text-gray-700 leading-8">
+                               We are committed to being a trusted voice in the tech community. Every article on BroBlogger is crafted with a focus on <strong class="font-semibold text-blue-600">accuracy</strong>, <strong class="font-semibold text-blue-600">authenticity</strong>, and a genuine passion for the subject. We're here to cut through the noise and provide you with content you can rely on.
+                           </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+  <%- include("partials/footer") %>
+</body>
+</html>

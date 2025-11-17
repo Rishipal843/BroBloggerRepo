@@ -1,0 +1,26 @@
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <% if (post) { %>
+    <title><%= post.title %> | BroBlogger</title>
+    <meta name="description" content="<%= post.meta_description || post.content.substring(0,150) %>">
+    <link rel="canonical" href="https://yourwebsite.com/post/<%= post.slug %>" />
+
+    <!-- Social Media (Open Graph) -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourwebsite.com/post/<%= post.slug %>">
+    <meta property="og:title" content="<%= post.title %>">
+    <meta property="og:description" content="<%= post.meta_description || post.content.substring(0,150) %>">
+    <meta property="og:image" content="<%= post.image || '/images/default.png' %>">
+  <% } else { %>
+    <title><%= title %> | BroBlogger</title>
+    <meta name="description" content="Welcome to BinaryBravos, a blog about technology and more.">
+    <link rel="canonical" href="https://yourwebsite.com/" />
+  <% } %>
+
+  <link rel="icon" type="image/png" href="/images/bb_logo-removebg-previewnew.png">
+  <link rel="stylesheet" href="/css/output.css">
+</head>
+

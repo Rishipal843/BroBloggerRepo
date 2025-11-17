@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/header", { title: "Admin Dashboard", post: null }) %>
+<body>
+  <%- include("../partials/head") %>
+
+  <div class="max-w-5xl mx-auto py-12 px-6">
+
+    <div class="flex justify-between items-center mb-6">
+  <h1 class="text-3xl font-bold text-gray-900">⚡ Admin Dashboard</h1>
+  <a href="/admin/logout" class="bg-red-600 text-white px-4 py-2 rounded-lg">🚪 Logout</a>
+</div>
+
+
+    <a href="/admin/add-post" class="bg-green-600 text-white px-4 py-2 rounded-lg mb-6 inline-block">
+      ➕ Add New Post
+    </a>
+
+    <table class="w-full border border-gray-300 text-left">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="p-3 border">Title</th>
+          <th class="p-3 border">Category</th>
+          <th class="p-3 border">Date</th>
+          <th class="p-3 border">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% posts.forEach(post => { %>
+          <tr>
+            <td class="p-3 border"><%= post.title %></td>
+            <td class="p-3 border"><%= post.category %></td>
+            <td class="p-3 border"><%= post.date.toDateString() %></td>
+            <td class="p-3 border space-x-2">
+              <a href="/admin/edit-post/<%= post._id %>" class="bg-blue-500 text-white px-3 py-1 rounded">✏️ Edit</a>
+              <form action="/admin/delete-post/<%= post._id %>" method="POST" style="display:inline;">
+                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded" onclick="return confirm('Delete this post?');">🗑️ Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <%- include("../partials/footer") %>
+</body>
+</html>

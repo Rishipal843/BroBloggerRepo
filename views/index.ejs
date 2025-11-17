@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/header", { title: "Home", post: null }) %>
+<body>
+  
+  <%- include("partials/head") %>
+ 
+<!-- hero section -->
+<section class="relative overflow-hidden bg-gray-900">
+  <div
+    class="absolute inset-0 opacity-40"
+    style="
+      background-image: url('/images/new\ gemini.png');
+      background-size: cover;
+      background-position: center;
+    "
+  ></div>
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        Welcome to
+        <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">
+          BroBlogger
+        </span>
+      </h1>
+      <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+        Discover the real story behind today's technology. We deliver verified facts on software, hardware, and breakthrough innovations.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+       <a href="#latest-posts">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-transform transform hover:scale-105">
+          Start Reading
+        </button>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 🔍 Search Bar -->
+<section id="posts-section" class=" bg-white py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <form action="/search" method="get" class="relative">
+      <div class="relative">
+        
+        <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+            </svg>
+        </div>
+         <input type="hidden" name="fragment" value="posts-section">
+        <input
+          type="text"
+          name="q"
+          placeholder="Search articles, topics, or categories..."
+          class="w-full text-lg py-3 pl-12 pr-36 rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
+        />
+
+        <button
+          type="submit"
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-full transition-colors"
+        >
+          Search
+        </button>
+
+      </div>
+    </form>
+    
+  </div>
+</section>
+
+
+
+
+<section id="latest-posts">
+  <!-- The grid now shows the paginated posts -->
+   <div class="text-center mt-8 mb-5">
+  <h1 class="text-4xl font-bold text-gray-900 inline-block relative pb-3">
+    Latest Blogs
+    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-blue-600 rounded-full"></span>
+  </h1>
+</div>
+  <div class="grid px-7 py-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% posts.forEach(post => { %>
+      <a href="/post/<%= post.slug %>" class="group block bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+        <article>
+          <div class="aspect-[16/10] overflow-hidden">
+            <% if (post.image) { %>
+              <img src="<%= post.image %>" alt="<%= post.title %>" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <% } %>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"><%= post.category %></span>
+            </div>
+            <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200 line-clamp-2"><%= post.title %></h2>
+            <% if (post.content) { %>
+              <p class="text-gray-600 mb-4 line-clamp-3"><%- post.content.replace(/<[^>]*>/g, '').substring(0, 120) %>...</p>
+            <% } %>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+              <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                  <%= post.author.split(' ').map(n => n[0]).join('').toUpperCase() %>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-900"><%= post.author %></p>
+                  <p class="text-xs text-gray-500"><%= new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </a>
+    <% }) %>
+  </div>
+
+  
+  <div class="flex justify-center items-center py-8 space-x-2">
+  
+  <%# This new variable creates the correct base URL for our links %>
+  <% const baseUrl = query ? `/?q=${encodeURIComponent(query)}&` : '/?'; %>
+
+  <% if (currentPage > 1) { %>
+    <%# The href now uses the baseUrl to preserve the search query %>
+    <a href="<%= baseUrl %>page=<%= currentPage - 1 %>" class="px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+      &laquo; Previous
+    </a>
+  <% } %>
+
+  <% for (let i = 1; i <= totalPages; i++) { %>
+    <% if (i === currentPage) { %>
+      <span class="px-4 py-2 border border-blue-600 bg-blue-600 text-white rounded-lg"><%= i %></span>
+    <% } else { %>
+      <%# The href now uses the baseUrl %>
+      <a href="<%= baseUrl %>page=<%= i %>" class="px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+        <%= i %>
+      </a>
+    <% } %>
+  <% } %>
+
+  <% if (currentPage < totalPages) { %>
+    <%# The href now uses the baseUrl %>
+    <a href="<%= baseUrl %>page=<%= currentPage + 1 %>" class="px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+      Next &raquo;
+    </a>
+  <% } %>
+  </div>
+  
+</section>
+
+  <!-- Footer -->
+  <%- include("partials/footer") %>
+
+</body>
+</html>
+
+
+
+
+
+
+
