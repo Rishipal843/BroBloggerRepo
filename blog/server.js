@@ -351,7 +351,7 @@ function isAuthenticated(req, res, next) {
 // Dynamic Sitemap
 app.get("/sitemap.xml", async (req, res) => {
   try {
-    const baseURL = process.env.BASE_URL || "https://yourdomain.com"; // Add BASE_URL to .env
+    const baseURL = process.env.BASE_URL || "https://brobloggerrepo-2.onrender.com"; // Add BASE_URL to .env
     const posts = await Post.find().select("slug date").sort({ date: -1 });
 
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
