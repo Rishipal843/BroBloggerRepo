@@ -347,6 +347,55 @@ function isAuthenticated(req, res, next) {
   res.redirect("/admin/login");
 }
 
+
+// Dynamic Sitemap
+app.get("/sitemap.xml", async (req, res) => {
+  try {
+    const baseURL = process.env.BASE_URL || "https://yourdomain.com"; // Add BASE_URL to .env
+    const posts = await Post.find().select("slug date").sort({ date: -1 });
+
+    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+`;
+
+    // Static pages
+    const staticPages = [
+      { url: "/", priority: "1.0", changefreq: "daily" },
+      { url: "/about", priority: "0.8", changefreq: "monthly" },
+      { url: "/contact", priority: "0.7", changefreq: "monthly" }
+    ];
+
+    staticPages.forEach(page => {
+      sitemap += `  <url>
+    <loc>${baseURL}${page.url}</loc>
+    <priority>${page.priority}</priority>
+    <changefreq>${page.changefreq}</changefreq>
+  </url>
+`;
+    });
+
+    // Dynamic post pages
+    posts.forEach(post => {
+      sitemap += `  <url>
+    <loc>${baseURL}/post/${post.slug}</loc>
+    <lastmod>${post.date.toISOString().split('T')[0]}</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+`;
+    });
+
+    sitemap += `</urlset>`;
+
+    res.type("application/xml");
+    res.send(sitemap);
+  } catch (err) {
+    console.error("Error generating sitemap:", err);
+    res.status(500).send("Error generating sitemap");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
